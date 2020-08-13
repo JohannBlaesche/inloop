@@ -300,6 +300,9 @@ def get_last_checkpoint(request, slug):
 
     checkpoints = Checkpoint.objects.filter(author=request.user, task=task)
     if not checkpoints.exists():
+        if task.templates:
+            files = json.loads(task.templates)
+            return JsonResponse({'success': True, 'files': files})
         return JsonResponse({'success': True, 'files': None})
 
     last_checkpoint = checkpoints.last()
