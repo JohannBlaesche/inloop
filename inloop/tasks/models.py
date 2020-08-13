@@ -95,14 +95,19 @@ class Task(models.Model):
 
     # optional fields
     deadline = models.DateTimeField(
-        help_text='Optional date the task is due to',
         null=True,
-        blank=True
+        blank=True,
+        help_text='Optional date the task is due to',
     )
     max_submissions = models.IntegerField(
         null=True,
         blank=True,
-        help_text='Submission limit (per user, -1 means unlimited, null means default)'
+        help_text='Submission limit (per user, -1 means unlimited, null means default)',
+    )
+    templates = models.TextField(
+        null=True,
+        blank=True,
+        help_text='Optional file templates for this task, encoded in JSON',
     )
 
     objects = TaskQuerySet.as_manager()
